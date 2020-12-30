@@ -25,3 +25,13 @@ resource "aws_s3_bucket" "log" {
     }
   }
 }
+
+# S3へのアクセスが非公開でも保存しているオブジェクトが公開設定の場合にアクセスできない設定
+resource "aws_s3_bucket_public_access_block" "log" {
+  bucket                  = aws_s3_bucket.log.id
+  block_public_acls       = true
+  ignore_public_acls      = true
+  block_public_policy     = true
+  restrict_public_buckets = true
+}
+
