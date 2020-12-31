@@ -52,6 +52,7 @@ resource "aws_iam_group_policy_attachment" "admin" {
 #   max_password_age               = 0
 # }
 
+# ec2用のロール
 module "ec2_role" {
   source     = "./iam_role_module"
   name       = "ec2-role"
@@ -66,3 +67,4 @@ data "aws_iam_policy_document" "ec2_document" {
     resources = ["*"]
   }
 }
+
