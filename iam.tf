@@ -68,3 +68,23 @@ data "aws_iam_policy_document" "ec2_document" {
   }
 }
 
+# CloudTrailがCloudWatchlogsへアクセスするためのpolicy
+data "aws_iam_policy_document" "cloudtrail" {
+  statement {
+    effect    = "Allow"
+    resources = ["arn:aws:logs:*:*:log-group:*:log-stream:*"]
+
+    actions = [
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+  }
+}
+
+# Cloudtrailのiamロール
+module "cloudtrail_iam_role" {
+  source     = "./iam_role_module"
+  name       = "cloudtrail"
+  identifier = "cloudtrail.amazonaws.com"
+  policy     = data.aws_iam_policy_document.cloudtrail.json
+}
