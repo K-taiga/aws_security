@@ -1,4 +1,4 @@
 module "log_bucket" {
-  source = "./buket_module"
+  source = "./bucket_module"
   name   = "kumaeers-log"
 }
