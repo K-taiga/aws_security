@@ -2,6 +2,7 @@ variable "name" {}
 
 resource "aws_s3_bucket" "this" {
   bucket = var.name
+  force_destroy = true
 
   # バージョニングを有効にしオブジェクトの復元を可能とする
   versioning {
