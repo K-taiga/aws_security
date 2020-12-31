@@ -51,3 +51,18 @@ resource "aws_iam_group_policy_attachment" "admin" {
 #   # パスワードの有効期限 0は無期限
 #   max_password_age               = 0
 # }
+
+module "ec2_role" {
+  source     = "./iam_role_module"
+  name       = "ec2-role"
+  identifier = "ec2.amazonaws.com"
+  policy     = data.aws_iam_policy_document.ec2_document.json
+}
+
+data "aws_iam_policy_document" "ec2_document" {
+  statement {
+    effect    = "Allow"
+    actions   = ["s3:*"]
+    resources = ["*"]
+  }
+}
