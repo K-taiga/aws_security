@@ -56,7 +56,7 @@ resource "aws_cloudformation_stack" "chatbot" {
         Properties = {
           ConfigurationName = "AlertNotifications"
           SlackWorkspaceId  = "T2X9S1TR9"
-          SlackChannelId    = "https://webengershq.slack.com/archives/C01JB14L6BX"
+          SlackChannelId    = "C01JB14L6BX"
           IamRoleArn        = module.chatbot_iam_role.arn
           SnsTopicArns      = [aws_sns_topic.chatbot.arn]
         }
